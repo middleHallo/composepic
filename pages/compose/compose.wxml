@@ -6,6 +6,7 @@
       </scroll-view>
       <view class='action'>
           <button class='weui-btn' type='default' bindtap='back'>返回首页</button>
+          <!-- 可以等用户量上去了再添加此部分数据 -->
           <!-- <button class='weui-btn' type='primary' bindtap='aboutus'>关于我们</button> -->
           <button type='primary' bindtap='saveimg'>保存图片</button>
       </view>
