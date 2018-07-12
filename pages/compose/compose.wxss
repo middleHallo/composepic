@@ -1,0 +1,24 @@
+/* pages/compose/compose.wxss */
+
+.all{
+  background-color: #F3F3F3;
+  height: 100vh;
+}
+.result{
+  
+  height: 100vh;
+}
+
+.scrollview{
+  padding-top: 20px;
+  width:750rpx;
+  text-align: center;
+}
+.action{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+

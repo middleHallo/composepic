@@ -1,0 +1,14 @@
+<!--pages/compose/compose.wxml-->
+<view class='all'>
+    <view class='result' hidden='{{resultHidden}}'>
+      <scroll-view class='scrollview' scroll-y="true" style='height:{{scrollHeight}}px'>
+          <image src='{{url}}'width="710rpx" mode='widthFix' bindtap='preview'></image>
+      </scroll-view>
+      <view class='action'>
+          <button class='weui-btn' type='default' bindtap='back'>返回首页</button>
+          <!-- <button class='weui-btn' type='primary' bindtap='aboutus'>关于我们</button> -->
+          <button type='primary' bindtap='saveimg'>保存图片</button>
+      </view>
+    </view>
+    <canvas canvas-id='share' style='width:{{maxwidth}}px;height:{{maxheight}}px' hidden='{{canvasHidden}}'></canvas>
+</view>

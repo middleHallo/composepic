@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/montage/montage",
+    "pages/compose/compose",
+    "pages/about/about"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "图片拼接i",
+    "navigationBarTextStyle":"black"
+  }
+}

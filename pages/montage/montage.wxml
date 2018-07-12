@@ -1,0 +1,30 @@
+<!--pages/montage/montage.wxml-->
+<view style='height:100vh'>
+<view class='tipsview'>
+  <text>tips:1.请不要选择过大的图片 2.暂不支持拖拽图片排序，请见谅</text>
+</view>
+<view wx:if="{{imglistslen != 0}}" >
+    <scroll-view class='scrollview' scroll-y="true" class='prepview' style='height:{{scrollHeight}}px;'>
+        <block wx:for="{{imglists}}" wx:key="{{index}}">
+          <view class='imgview'>
+            <!-- <image src='{{item}}' class='selectedimg' mode='widthFix' data-idx='{{index}}' catchtap='preimg' bindlongtap='ltimg' bindtouchstart='btimg' bindtouchmove='tmimg' bindtouchend='teimg'></image> -->
+            <!-- 暂时去掉了拖拽排序 -->
+            <image src='{{item}}' class='selectedimg' mode='widthFix' data-idx='{{index}}' catchtap='preimg'></image>
+            <image src='/images/close.png' class='closeimg' data-idx='{{index}}' catchtap='deleteimg'></image>
+          </view>
+        </block>
+        <!-- 拖拽时才显示的div -->
+        <image hidden='{{touchimage}}' mode='widthFix' src='{{touchimageurl}}' class='touchimagewxss' style='left:{{currselimgleft}}rpx;top:{{currselimgtop}}rpx'></image>
+    </scroll-view>
+</view>
+<view wx:else style='height:{{scrollHeight}}px;line-height:{{scrollHeight}}px;' class='noimgs'>
+    <image src='/images/add2.png' style='width:150px;height:150px' bindtap='chooseimg'></image>
+</view>
+
+  <view class='actionview' >
+      <button class='weui-btn' type='default' bindtap='chooseimg'>选择图片</button>
+      <button class='weui-btn' type='warn' bindtap='clearimg'>清空图片</button>
+      <button class='weui-btn' type='primary' bindtap='createlogpic'>生成图片</button>
+  </view>
+
+</view>

@@ -1,0 +1,77 @@
+/* pages/montage/montage.wxss */
+
+.tipsview{
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: center;
+  height: 25px;
+  line-height: 25px;
+  vertical-align: middle;
+  color: #A3A3A3;
+}
+
+.actionview{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.actionview button{
+  margin-bottom: 30rpx;
+  margin-top: 20px;
+}
+
+#chosebtn{
+  margin-top: 15px;
+}
+
+.scrollview{
+  position: relative;
+}
+
+.prepview{
+  margin-top: 10px;
+  background-color: #F3F3F3;
+}
+
+.noimgs{
+  margin-top: 10px;
+  background-color: #F3F3F3;
+  text-align: center;
+  vertical-align: middle;
+  
+}
+
+.imgview{
+  position: relative;
+  display: inline-block;
+  width: 223rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+.selectedimg{
+  width: 223rpx;
+}
+
+.closeimg{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  background-color: white;
+}
+
+.touchimagewxss{
+  opacity: 0.4;
+  position: absolute;
+  width: 223rpx;
+}
