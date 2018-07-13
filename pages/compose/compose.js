@@ -16,18 +16,13 @@ Page({
     url: '',
     maxwidth: 0,
     maxheight: 0,
-    cptype: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let cptype = options.cptype
-    this.setData({
-      cptype: cptype
-    })
-    
+
   },
 
   /**
@@ -42,10 +37,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    let imglist = wx.getStorageSync('imglist')
-    this.setData({
-      imglist: imglist
-    })
+    
     this.initinfo()
     
   },
@@ -59,13 +51,20 @@ Page({
 
   // 初始化相关配置信息
   initinfo: function () {
+
+    let imglist = wx.getStorageSync('imglist')
+    this.setData({
+      imglist: imglist
+    })
+
     let screenheight = wx.getSystemInfoSync().screenHeight
     let scrollHeight = screenheight - 170
-    let imglist = this.data.imglist
+
     let imgwidths = []
     let imgheights = []
     let maxwidth = 0
     let maxheight = 0
+
     for (let i = 0; i < imglist.length; i++) {
       wx.getImageInfo({
         src: imglist[i],
@@ -86,6 +85,8 @@ Page({
       if (dwith < maxwidth){
         let dis = maxwidth / dwith
         let dheight = imgheights[j] * dis
+
+        imgheights[j] = dheight
         maxheight += dheight 
       }else{
         maxheight += imgheights[j]
@@ -110,10 +111,7 @@ Page({
     
     let that = this
     let imglist = this.data.imglist
-    let widths = this.data.imgwidths
     let heights = this.data.imgheights
-
-    let cptype = this.data.cptype
 
     let maxwidth = this.data.maxwidth
     let maxheight = this.data.maxheight
@@ -122,21 +120,8 @@ Page({
     let dy = 0
     for (let i = 0; i < imglist.length; i++) {
       let sourcestr = imglist[i]
-      let dx = 0
-      // if (cptype == 0) { // 左对齐拼接图片
-      //   dx = 0
-      // } else if (cptype == 1) {  // 居中对齐拼接图片
-      //   dx = Math.ceil((maxwidth - widths[i]) / 2.0)
-      // } else {  // 右对齐拼接图片
-      //   dx = maxwidth - widths[i]
-      // }
-      let dwidth = widths[i]
       let dheight = heights[i]
-      if (dwidth < maxwidth){
-        let bl = maxwidth / dwidth
-        dheight = dheight * bl
-      }
-      context.drawImage(sourcestr, dx, dy, maxwidth,dheight)
+      context.drawImage(sourcestr, 0, dy, maxwidth,dheight)
       dy += dheight
     }
     context.save()
