@@ -27,30 +27,34 @@ Page({
     this.setData({
       cptype: cptype
     })
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    /**
+     * 这部分代码放到onshow中，每次点预览图片回来都会调用重新渲染页面
+     * 会造成很大的性能问题，有可能会触发闪退。
+     * 放到onready中只会执行一次
+     */
+    wx.showLoading({
+      title: '加载中...',
+    })
+    let imglist = wx.getStorageSync('imglist')
+    this.setData({
+      imglist: imglist
+    })
+    this.initinfo()
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 获取图片信息
-    let imglist = wx.getStorageSync('imglist')
-    this.setData({
-      imglist: imglist
-    })
-
-    wx.showLoading({
-      title: '加载中...',
-    })
-    this.initinfo()
-
+    
   },
 
   // 初始化相关配置信息
@@ -72,11 +76,22 @@ Page({
           if (maxwidth < res.width) {
             maxwidth = res.width
           }
-          // 计算总的高度
-          maxheight += res.height
         }
       })
     }
+
+    // 计算最大高度
+    for (let j = 0; j < imglist.length;j++){
+      let dwith = imgwidths[j]
+      if (dwith < maxwidth){
+        let dis = maxwidth / dwith
+        let dheight = imgheights[j] * dis
+        maxheight += dheight 
+      }else{
+        maxheight += imgheights[j]
+      }
+    }
+
     this.setData({
       imgwidths: imgwidths,
       imgheights: imgheights,
@@ -92,12 +107,7 @@ Page({
   },
 
   composepic: function () {
-
-  this.centercomposepic()
-
-  },
-  // 左对齐、居中对齐、右对齐拼接，根据传进来的cptype来判别
-  centercomposepic: function () {
+    
     let that = this
     let imglist = this.data.imglist
     let widths = this.data.imgwidths
@@ -112,21 +122,22 @@ Page({
     let dy = 0
     for (let i = 0; i < imglist.length; i++) {
       let sourcestr = imglist[i]
-
-      console.log(sourcestr)
       let dx = 0
-      if (cptype == 0) { // 左对齐拼接图片
-        dx = 0
-      } else if (cptype == 1) {  // 居中对齐拼接图片
-        dx = Math.ceil((maxwidth - widths[i]) / 2.0)
-      } else {  // 右对齐拼接图片
-        dx = maxwidth - widths[i]
+      // if (cptype == 0) { // 左对齐拼接图片
+      //   dx = 0
+      // } else if (cptype == 1) {  // 居中对齐拼接图片
+      //   dx = Math.ceil((maxwidth - widths[i]) / 2.0)
+      // } else {  // 右对齐拼接图片
+      //   dx = maxwidth - widths[i]
+      // }
+      let dwidth = widths[i]
+      let dheight = heights[i]
+      if (dwidth < maxwidth){
+        let bl = maxwidth / dwidth
+        dheight = dheight * bl
       }
-      // let dWidth = widths[i]
-      // let dHeight = heights[i]
-      // context.drawImage(sourcestr,dx,dy,dWidth,dHeight)
-      context.drawImage(sourcestr, dx, dy)
-      dy += heights[i]
+      context.drawImage(sourcestr, dx, dy, maxwidth,dheight)
+      dy += dheight
     }
     context.save()
 
@@ -142,7 +153,6 @@ Page({
         canvasId: 'share',
         success: function (res) {
 
-          console.log(res)
           if (!res.tempFilePath) {
             wx.showModal({
               title: '提示',
@@ -150,19 +160,28 @@ Page({
               showCancel: false
             })
           }
-          wx.hideLoading()
           that.setData({
             url: res.tempFilePath,
             canvasHidden: true,
             resultHidden: false
           })
-
+         
         },
         fail: function () {
-          console.log(222)
+          wx.hideLoading()
+          wx.showModal({
+            title: '出错了',
+            content: '请重新尝试！',
+            showCancel:false
+          })
         }
       })
     });
+  },
+
+  // 监听图片加载完成
+  imageLoad:function(){
+    wx.hideLoading()
   },
 
   // 预览图片
@@ -196,7 +215,7 @@ Page({
         })
       },
       fail: function (err) {
-        console.log(err)
+        
       }
     })
   },
@@ -210,7 +229,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**
@@ -219,6 +238,7 @@ Page({
   onUnload: function () {
     // 清除相关缓存
     wx.clearStorageSync('imglist')
+
   },
 
   /**

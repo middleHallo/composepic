@@ -24,7 +24,7 @@
   <view class='actionview' >
       <button class='weui-btn' type='default' bindtap='chooseimg'>选择图片</button>
       <button class='weui-btn' type='warn' bindtap='clearimg'>清空图片</button>
-      <button class='weui-btn' type='primary' bindtap='createlogpic'>生成图片</button>
+      <button class='weui-btn' type='primary' bindtap='createlogpic'>拼接图片</button>
   </view>
 
 </view>

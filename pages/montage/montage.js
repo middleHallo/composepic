@@ -355,7 +355,6 @@ Page({
         content: '当前未选择图片，无法生成拼接图片。',
         showCancel:false
       })
-
       return 0
     }
 
