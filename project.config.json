@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.1",
+	"libVersion": "1.9.1",
 	"appid": "wxdca1a9975cae5ef7",
 	"projectname": "composepic",
 	"isGameTourist": false,
