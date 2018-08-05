@@ -1,6 +1,6 @@
 <!--pages/compose/compose.wxml-->
 <view class='all'>
-    <view class='result' hidden='{{resultHidden}}'>
+    <view class='result'>
       <scroll-view class='scrollview' scroll-y="true" style='height:{{scrollHeight}}px'>
           <image src='{{url}}'width="710rpx" mode='widthFix' bindtap='preview' bindload="imageLoad"></image>
       </scroll-view>

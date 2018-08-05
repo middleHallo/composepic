@@ -40,6 +40,7 @@
 .prepview{
   margin-top: 10px;
   background-color: #F3F3F3;
+  padding: 20rpx;
 }
 
 .noimgs{
@@ -57,21 +58,51 @@
   margin-left: 20rpx;
   margin-top: 20rpx;
 }
-.selectedimg{
-  width: 223rpx;
-}
-
-.closeimg{
-  width: 30rpx;
-  height: 30rpx;
-  position: absolute;
-  right: 0rpx;
-  top: 0rpx;
-  background-color: white;
-}
 
 .touchimagewxss{
   opacity: 0.4;
   position: absolute;
   width: 223rpx;
+}
+
+.imgContainer{
+  padding: 20rpx 30rpx;
+  margin-bottom: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.leftContent{
+  width: 570rpx;
+}
+
+/**
+* 被选择的img
+*/
+.simg{
+  width: 250rpx;
+}
+
+.rightAction{
+  padding: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.deleteList{
+  width: 30px;
+  height: 30px;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+
+.sort{
+  width: 30px;
+  height: 30px;
 }

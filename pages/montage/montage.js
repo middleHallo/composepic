@@ -50,7 +50,7 @@ Page({
     let width = wx.getSystemInfoSync().screenWidth
 
     let height = wx.getSystemInfoSync().screenHeight
-    let scrollHeight = height - 180
+    let scrollHeight = height - 190
 
     let discussx = 750 / width
 
@@ -113,6 +113,74 @@ Page({
   },
 
   /**
+   * 向上排序
+   */
+  sortTop:function(e){
+    let idx = e.currentTarget.dataset.idx
+    let imglist = this.data.imglists
+    let imglistslen = this.data.imglistslen
+    let arr = this.data.imageheights
+
+    // 上面已无图片可进行交换排序
+    if(idx == 0){
+     return 0
+    }
+
+    // 被选中的img及其高度
+    let selectedImg = imglist[idx]
+    let selectedHei = arr[idx]
+
+    // 上一张的图片及其高度
+    let preImg = imglist[idx - 1]
+    let preHei = arr[idx - 1]
+
+    // 交换操作
+    imglist[idx] = preImg
+    arr[idx] = preHei
+    imglist[idx - 1] = selectedImg
+    arr[idx - 1] = selectedHei
+
+    this.setData({
+      imglists: imglist,
+      imageheights:arr
+    })
+
+  },
+
+  /**
+   * 向下排序
+   */
+  sortBottom:function(e){
+    let idx = e.currentTarget.dataset.idx
+    let imglist = this.data.imglists
+    let imglistslen = this.data.imglistslen
+    let arr = this.data.imageheights
+
+    // 下面已无图片进行交换排序
+    if (idx == (imglist.length - 1)) {
+      return 0
+    }
+
+    // 被选中的img及其高度
+    let selectedImg = imglist[idx]
+    let selectedHei = arr[idx]
+
+    // 上一张的图片及其高度
+    let preImg = imglist[idx + 1]
+    let preHei = arr[idx + 1]
+
+    // 交换操作
+    imglist[idx] = preImg
+    arr[idx] = preHei
+    imglist[idx + 1] = selectedImg
+    arr[idx + 1] = selectedHei
+
+    this.setData({
+      imglists: imglist,
+      imageheights: arr
+    })
+  },
+  /**
    * 删除选中的图片
    */
   deleteimg: function (e) {
@@ -121,19 +189,31 @@ Page({
     let imglistslen = this.data.imglistslen
 
     let arr = this.data.imageheights
-    /**
+    let that = this
+
+    wx.showModal({
+      title: '请确认操作',
+      content: '是否删除选中的第' + (idx - 0 + 1) + '张图片',
+      success:res=>{
+        if(res.confirm){
+          /**
      * 注：这里返回的是被删除的那个选项，所以此处获取那个被删除的图片并无意义
      */
-    imglist.splice(idx, 1)
-    /**
-     * 删除对应的图片的高度
-     */
-    arr.splice(idx, 1)
-    let newlen = imglistslen - 1
-    this.setData({
-      imglists: imglist,
-      imglistslen: newlen,
-      imageheights: arr
+          imglist.splice(idx, 1)
+          /**
+           * 删除对应的图片的高度
+           */
+          arr.splice(idx, 1)
+          let newlen = imglistslen - 1
+          that.setData({
+            imglists: imglist,
+            imglistslen: newlen,
+            imageheights: arr
+          })
+        }else{ // 点了取消之后，直接退出当前操作
+          return 0;
+        }
+      }
     })
   },
 

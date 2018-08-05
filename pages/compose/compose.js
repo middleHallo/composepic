@@ -34,10 +34,6 @@ Page({
      * 会造成很大的性能问题，有可能会触发闪退。
      * 放到onready中只会执行一次
      */
-    wx.showLoading({
-      title: '加载中...',
-    })
-    
     this.initinfo()
     
   },
@@ -51,6 +47,9 @@ Page({
 
   // 初始化相关配置信息
   initinfo: function () {
+    wx.showLoading({
+      title: '加载中...',
+    })
 
     let imglist = wx.getStorageSync('imglist')
     this.setData({
@@ -147,8 +146,7 @@ Page({
           }
           that.setData({
             url: res.tempFilePath,
-            canvasHidden: true,
-            resultHidden: false
+            canvasHidden: true
           })
          
         },
@@ -195,7 +193,7 @@ Page({
       success: function (suc) {
         wx.showModal({
           title: '保存成功！',
-          content: '快点去发朋友圈试试吧！',
+          content: '喵喵喵~~',
           showCancel: false
         })
       },
