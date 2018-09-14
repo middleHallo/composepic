@@ -1,8 +1,10 @@
 {
   "pages":[
+    "pages/home/home",
     "pages/montage/montage",
     "pages/compose/compose",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/compress/compress"
   ],
   "window":{
     "backgroundTextStyle":"light",

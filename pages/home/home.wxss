@@ -1,0 +1,48 @@
+/* pages/home/home.wxss */
+
+.m-title {
+  display: block;
+  font-weight: bolder;
+  font-size: 32px;
+  width: 750rpx;
+  text-align: center;
+  margin-top: 40rpx;
+}
+
+.m-message {
+  display: block;
+
+}
+.g-action {
+  margin-top: 80rpx;
+}
+
+.m-action {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 250rpx;
+  padding-left: 180rpx;
+}
+
+.m-pj {
+  background-color: rosybrown;
+}
+
+.m-ys {
+  background-color: orange;
+}
+
+.m-action-image {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+
+.m-action-message {
+  font-size: 22px;
+  font-weight: bolder;
+  margin-left: 40rpx;
+}

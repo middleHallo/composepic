@@ -1,0 +1,16 @@
+<!--pages/home/home.wxml-->
+<view g-welcome>
+  <text class='m-title'>welcome</text>
+</view>
+
+<view class='g-action'>
+  <view class='m-action m-pj' bindtap='gotoComposepic'>
+    <image src='/images/pj2.png' class='m-action-image'></image>
+    <text class='m-action-message'>图片拼接</text>
+  </view>
+  <!-- <view class='m-action m-ys' bindtap='gotoCompress'>
+    <image src='/images/ys1.png' class='m-action-image m-action-ys'></image>
+    <text class='m-action-message'>图片压缩</text>
+  </view> -->
+  <ad unit-id="adunit-c0b75660f58c283f"></ad>
+</view>

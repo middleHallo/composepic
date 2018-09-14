@@ -1,0 +1,11 @@
+<!--pages/compress/compress.wxml-->
+<view>
+  <button bindtap='choseImg'>选择图片</button>
+  <image src='{{selected}}' style='width:750rpx;' mode='widthFix' wx:if='{{chooseSuc}}'></image>
+</view>
+<view>
+  <input type='digit' placeholder='输入要压缩的倍数，如 0.3'></input>
+  <button bindtap='compressImg'>压缩</button>
+  <image src='{{compressurl}}' wx:if="{{compressSuc}}" style='width:750rpx;' mode='widthFix'></image>
+</view>
+<canvas canvas-id='compress' style='width:{{selectedWidth}}px;height:{{selectedHeight}}px' hidden></canvas>
