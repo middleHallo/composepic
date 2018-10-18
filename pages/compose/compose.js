@@ -6,7 +6,6 @@ Page({
    */
   data: {
     canvasHidden: true,
-    resultHidden: true,
     canvasWidth: 0,
     canvasHeight: 0,
     scrollHeight: 0,
@@ -54,7 +53,7 @@ Page({
   initinfo: function (imglist2) {
   
     let that = this
-    var promist = new Promise(function (resolve, reject){
+    let pros = new Promise(function (resolve, reject){
     let imglist = imglist2
     let imgwidths = []
     let imgheights = []
@@ -124,40 +123,41 @@ Page({
         canvasId: 'share',
         fileType:'jpg',
         success: function (res) {
+          that.setData({
+            url: res.tempFilePath,
+            canvasHidden: true,
+            isdone: 1
+          })
           resolve(res.tempFilePath)
         },
         fail: function () {
-
+          that.setData({
+            isdone: 3,
+            canvasHidden: true
+          })
           reject('出错了...')
         }
       })
     });
   });
 
-    promist.then(function(url){
-      that.setData({
-        url: url,
-        canvasHidden: true,
-        isdone:1
-      })
+
+    pros.then(function (url) {
+      
       wx.showToast({
-        title: '拼接成功',
-        icon:'success',
-        duration:1100
+        title: '拼接成功！',
+        icon: 'success',
+        duration: 1200
       })
 
-    }).catch(function(error){
-      that.setData({
-        isdone: 3,
-        canvasHidden: true
-      })
+    }).catch(function(){
+
       wx.showToast({
-        title: '拼接失败',
-        icon: 'error',
-        duration: 1100
+        title: '拼接失败！',
+        icon: 'success',
+        duration: 1200
       })
     });
-
   },
 
 

@@ -5,11 +5,11 @@ view{
 .tipsview{
   padding-left: 10px;
   padding-right: 10px;
-  margin-top: 10px;
+  padding-top: 5px;
   font-size: 12px;
   text-align: center;
-  height: 25px;
-  line-height: 25px;
+  height: 17px;
+  line-height: 17px;
   vertical-align: middle;
   color: #A3A3A3;
 }

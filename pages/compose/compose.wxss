@@ -6,7 +6,6 @@
 }
 .result{
   
-  height: 100vh;
 }
 
 .scrollview{
@@ -15,11 +14,16 @@
   text-align: center;
 }
 .action{
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.action-item{
+  width: 240rpx;
+  height: 120rpx
 }
 
 .result_container{

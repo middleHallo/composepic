@@ -1,7 +1,7 @@
 <!--pages/montage/montage.wxml-->
 <view style='height:100vh'>
 <view class='tipsview'>
-  <text>tips:1.请不要选择过大的图片</text>
+  <text>tips:内存占用过大会导致闪退，请不要选择过大的图片哦~</text>
 </view>
 <view wx:if="{{imglistslen != 0}}" >
     <scroll-view class='scrollview' scroll-y="true" class='prepview' style='height:{{scrollHeight}}px;'>
