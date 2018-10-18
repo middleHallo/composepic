@@ -2,7 +2,12 @@
 <view class='all'>
     <view class='result'>
       <scroll-view class='scrollview' scroll-y="true" style='height:{{scrollHeight}}px'>
-          <image src='{{url}}'width="710rpx" mode='widthFix' bindtap='preview' bindload="imageLoad"></image>
+        <view class='result_container'>
+          <block wx:for="{{imglist}}" wx:key="{{index}}">
+            <image src='{{item}}'width="710rpx" mode='widthFix'></image>
+          </block>
+        </view>
+        
       </scroll-view>
       <view class='action'>
           <button class='weui-btn' type='default' bindtap='back'>返回首页</button>

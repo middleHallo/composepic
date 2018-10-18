@@ -11,24 +11,26 @@
               <image src='{{item}}' class='simg' mode='widthFix' catchtap='preimg'></image>
           </view>
           <view class='rightAction'>
-              <image src='/images/top3.png' class='sort top' data-idx='{{index}}' catchtap='sortTop'></image>
-              <image src='/images/delete.png' class='deleteList' data-idx='{{index}}' catchtap='deleteimg'></image>
-              <image src='/images/bottom3.png' class='sort bottom' data-idx='{{index}}' catchtap='sortBottom'></image>
+              <image src='/images/delete.png' class='item delete' data-idx='{{index}}' catchtap='deleteimg'></image>
+              <image src='/images/bottom3.png' class='item bottom' data-idx='{{index}}' catchtap='sortBottom'></image>
+              <image src='/images/top3.png' class='item top' data-idx='{{index}}' catchtap='sortTop'></image>
           </view>
         </view>
           
         </block>
         <!-- 拖拽时才显示的div -->
-        <image hidden='{{touchimage}}' mode='widthFix' src='{{touchimageurl}}' class='touchimagewxss' style='left:{{currselimgleft}}rpx;top:{{currselimgtop}}rpx'></image>
+        <!-- <image hidden='{{touchimage}}' mode='widthFix' src='{{touchimageurl}}' class='touchimagewxss' style='left:{{currselimgleft}}rpx;top:{{currselimgtop}}rpx'></image> -->
     </scroll-view>
 </view>
-<view wx:else style='height:{{scrollHeight}}px;line-height:{{scrollHeight}}px;' class='noimgs'>
-    <image src='/images/add2.png' style='width:150px;height:150px' bindtap='chooseimg'></image>
+<view wx:else class='noimgs'>
+    <image src='/images/add2.png' style='width:630rpx;margin-left:80rpx'  mode='widthFix'></image>
 </view>
-  <view class='actionview' >
-      <button class='weui-btn' type='default' bindtap='chooseimg'>选择图片</button>
-      <button class='weui-btn' type='warn' bindtap='clearimg'>清空图片</button>
-      <button class='weui-btn' type='primary' bindtap='createlogpic'>拼接图片</button>
+  <view class='actionview' wx:if="{{imglistslen != 0}}">
+      <image class='btn-item-select' src='/images/choose2.png'  bindtap='chooseimg'></image>
+      <image class='btn-item' src='/images/clear.png'  bindtap='clearimg'></image>
+      <image class='btn-item' src='/images/compose.png'  bindtap='createlogpic'></image>
   </view>
-
+  <view wx:else class='actionview-noimg'>
+    <image src='/images/choose.png' class='actionview-noimg-choose' bindtap='chooseimg'></image>
+  </view>
 </view>

@@ -12,5 +12,5 @@
     <image src='/images/ys1.png' class='m-action-image m-action-ys'></image>
     <text class='m-action-message'>图片压缩</text>
   </view> -->
-  <ad unit-id="adunit-c0b75660f58c283f"></ad>
+  <!-- <ad unit-id="adunit-c0b75660f58c283f"></ad> -->
 </view>

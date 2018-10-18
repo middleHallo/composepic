@@ -5,9 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imglist: [],
-    imgwidths: [],
-    imgheights: [],
     canvasHidden: true,
     resultHidden: true,
     canvasWidth: 0,
@@ -16,6 +13,7 @@ Page({
     url: '',
     maxwidth: 0,
     maxheight: 0,
+    isdone:0
   },
 
   /**
@@ -34,7 +32,14 @@ Page({
      * 会造成很大的性能问题，有可能会触发闪退。
      * 放到onready中只会执行一次
      */
-    this.initinfo()
+    let imglist = wx.getStorageSync('imglist')
+    let screenheight = wx.getSystemInfoSync().screenHeight
+    let scrollHeight = screenheight - 170
+    this.setData({
+      imglist: imglist,
+      scrollHeight: scrollHeight
+    })
+    this.initinfo(imglist)
     
   },
 
@@ -42,32 +47,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    // console.log(this.data.)
   },
 
   // 初始化相关配置信息
-  initinfo: function () {
-    wx.showLoading({
-      title: '加载中...',
-    })
-
-    let imglist = wx.getStorageSync('imglist')
-    this.setData({
-      imglist: imglist
-    })
-
-    let screenheight = wx.getSystemInfoSync().screenHeight
-    let scrollHeight = screenheight - 170
-
+  initinfo: function (imglist2) {
+  
+    let that = this
+    var promist = new Promise(function (resolve, reject){
+    let imglist = imglist2
     let imgwidths = []
     let imgheights = []
     let maxwidth = 0
     let maxheight = 0
 
-    for (let i = 0; i < imglist.length; i++) {
+    let len = imglist.length
+    for (let i = 0; i < len; i++) {
+      
       wx.getImageInfo({
         src: imglist[i],
         success: function (res) {
+          
           imgwidths.push(res.width)
           imgheights.push(res.height)
           //计算最大的宽度
@@ -78,49 +78,36 @@ Page({
       })
     }
 
-    // 计算最大高度
-    for (let j = 0; j < imglist.length;j++){
+    // 计算总高度
+    for (let j = 0; j < len; j++) {
+      
       let dwith = imgwidths[j]
-      if (dwith < maxwidth){
+      if (dwith < maxwidth) {
         let dis = maxwidth / dwith
         let dheight = imgheights[j] * dis
 
         imgheights[j] = dheight
-        maxheight += dheight 
-      }else{
+        maxheight += dheight
+      } else {
         maxheight += imgheights[j]
       }
     }
 
-    this.setData({
-      imgwidths: imgwidths,
-      imgheights: imgheights,
-      scrollHeight: scrollHeight,
+    that.setData({
+      
       // 画布要显示出来才能进行画图和拼接相关操作
       canvasHidden: false,
       maxwidth: maxwidth,
       maxheight: maxheight
     })
-
-    // 调用拼接图片的接口
-    this.composepic()
-  },
-
-  composepic: function () {
-    
-    let that = this
-    let imglist = this.data.imglist
-    let heights = this.data.imgheights
-
-    let maxwidth = this.data.maxwidth
-    let maxheight = this.data.maxheight
     //创建绘图上下文
     let context = wx.createCanvasContext('share', this)
     let dy = 0
-    for (let i = 0; i < imglist.length; i++) {
+    for (let i = 0; i < len; i++) {
+      
       let sourcestr = imglist[i]
-      let dheight = heights[i]
-      context.drawImage(sourcestr, 0, dy, maxwidth,dheight)
+      let dheight = imgheights[i]
+      context.drawImage(sourcestr, 0, dy, maxwidth, dheight)
       dy += dheight
     }
     context.save()
@@ -135,49 +122,44 @@ Page({
         destWidth: maxwidth,
         destHeight: maxheight,
         canvasId: 'share',
+        fileType:'jpg',
         success: function (res) {
-
-          if (!res.tempFilePath) {
-            wx.showModal({
-              title: '提示',
-              content: '图片绘制中，请稍后重试',
-              showCancel: false
-            })
-          }
-          that.setData({
-            url: res.tempFilePath,
-            canvasHidden: true
-          })
-         
+          resolve(res.tempFilePath)
         },
         fail: function () {
-          wx.hideLoading()
-          wx.showModal({
-            title: '出错了',
-            content: '请重新尝试！',
-            showCancel:false
-          })
+
+          reject('出错了...')
         }
       })
     });
+  });
+
+    promist.then(function(url){
+      that.setData({
+        url: url,
+        canvasHidden: true,
+        isdone:1
+      })
+      wx.showToast({
+        title: '拼接成功',
+        icon:'success',
+        duration:1100
+      })
+
+    }).catch(function(error){
+      that.setData({
+        isdone: 3,
+        canvasHidden: true
+      })
+      wx.showToast({
+        title: '拼接失败',
+        icon: 'error',
+        duration: 1100
+      })
+    });
+
   },
 
-  // 监听图片加载完成
-  imageLoad:function(){
-    wx.hideLoading()
-  },
-
-  // 预览图片
-  preview: function () {
-
-    console.log('preimg')
-    let urls = []
-    let url = this.data.url
-    urls.push(url)
-    wx.previewImage({
-      urls: urls,
-    })
-  },
 
   // 返回首页
   back: function () {
@@ -188,19 +170,45 @@ Page({
   saveimg: function () {
 
     let url = this.data.url
-    wx.saveImageToPhotosAlbum({
-      filePath: url,
-      success: function (suc) {
-        wx.showModal({
-          title: '保存成功！',
-          content: '喵喵喵~~',
-          showCancel: false
-        })
-      },
-      fail: function (err) {
-        
-      }
-    })
+    let isdone = this.data.isdone
+
+    // 先判断isdone==1，如果成功就不必判断后面的程序
+    if(isdone == 1){
+      
+      wx.saveImageToPhotosAlbum({
+        filePath: url,
+        success: function (suc) {
+          wx.showToast({
+            title: '保存成功!',
+            icon:'success',
+            duration:1200
+          })
+        },
+        fail: function (err) {
+          wx.showModal({
+            title: '保存失败！',
+            content: '请稍后重试！~~',
+            showCancel: false
+          })
+        }
+      })
+
+    }else if(isdone == 3){
+      wx.showToast({
+        title: '图片拼接出错，请重试...',
+        icon: 'none',
+        duration: 1500
+      })
+      return 0
+    }else{
+      wx.showToast({
+        title: '图片拼接中，请稍后再保存！',
+        icon: 'none',
+        duration: 1500
+      })
+      return 0
+    }
+    
   },
 
   // 跳转关于我们
