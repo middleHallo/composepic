@@ -1,16 +1,11 @@
 <!--pages/home/home.wxml-->
-<view g-welcome>
-  <text class='m-title'>welcome</text>
-</view>
+<view class='m_welcome'>
+  <text class='m-title m_offset_x'>welcome</text>
+  <text class='m_tips1 m_offset_x'>我们为您提供</text>
+  <text class='m_tips2 m_offset_x'>图片拼接、图片压缩功能</text>
 
-<view class='g-action'>
-  <view class='m-action m-pj' bindtap='gotoComposepic'>
-    <image src='/images/pj2.png' class='m-action-image'></image>
-    <text class='m-action-message'>图片拼接</text>
-  </view>
-  <!-- <view class='m-action m-ys' bindtap='gotoCompress'>
-    <image src='/images/ys1.png' class='m-action-image m-action-ys'></image>
-    <text class='m-action-message'>图片压缩</text>
-  </view> -->
-  <ad unit-id="adunit-c0b75660f58c283f"></ad>
+  <image src='/images/pj.png' class='m_action_img m_action_pj' mode='widthFix' bindtap='gotoComposepic'></image>
+  <image src='/images/ys.png' class='m_action_img m_action_ys'  mode='widthFix' bindtap='gotoCompress'></image>
 </view>
+<ad unit-id="adunit-c0b75660f58c283f" class="m_action_ad"></ad>
+

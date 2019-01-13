@@ -4,7 +4,8 @@
     "pages/montage/montage",
     "pages/compose/compose",
     "pages/about/about",
-    "pages/compress/compress"
+    "pages/compress/compress",
+    "pages/compressNow/compressNow"
   ],
   "window":{
     "backgroundTextStyle":"light",

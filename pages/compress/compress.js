@@ -19,69 +19,57 @@ Page({
   onLoad: function (options) {
   
   },
-
   /**
-   * 选择图片
+   * goNow 立即体验
    */
-  choseImg:function(){
-    let __this = this
-    wx.chooseImage({
-      success: function(res) {
-        __this.setData({
-          selected : res.tempFilePaths[0]
-        })
-       
-      },
+  goNow:function(){
+    wx.cloud.init()
+
+    wx.showLoading({
+      title: '加载中...',
     })
-  },
-
-  /**
-   * 点击压缩
-   */
-  compressImg:function(){
-    let url = this.data.selected
-    let __this = this
-    if(url == ''){
-      wx.showToast({
-        title: '请选择图片！',
-        icon:'none',
-        duration:2000
-      })
-      return 0
-    }
-
-    wx.getImageInfo({
-      src: url,
-      success:res=>{
-        let width = res.width
-        let height = res.height
-        __this.setData({
-          selectedWidth:width,
-          selectedHeight:height
-        })
+    wx.cloud.callFunction({
+      name:'index',
+      success:function(res){
+        if(res.result == 0){
+          wx.showModal({
+            title: '提示',
+            content: '目前此功能不稳定，请择需使用',
+            showCancel:false,
+            success:function(e){
+              if(e.confirm){
+                wx.navigateTo({
+                  url: '/pages/compressNow/compressNow',
+                })
+              }
+            }
+          })
+        }
+      },
+      fail:function(){
         setTimeout(function(){
-          __this.compress(url,width,height)
-        },400)
+          wx.showModal({
+            title:'提示',
+            content:'出错了，是否继续？',
+            success:function(e){
+              if(e.confirm){
+                wx.navigateTo({
+                  url: '/pages/compressNow/compressNow',
+                })
+              }
+            }
+          })
+        },500)
+      },
+      complete:function(){
+        wx.hideLoading()
       }
     })
-
+    // wx.navigateTo({
+    //   url: '',
+    // })
   },
-
-  /**
-   * 压缩图片js
-   */
-  compress:function(url,width,height){
-    let __this = this
-    let ctx = wx.createCanvasContext('compress', this)
-    // let url = __this.data.
-    ctx.drawImage(url,0,0,width,height)
-
-    ctx.draw(false,function(res){
-
-    })
-
-  },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

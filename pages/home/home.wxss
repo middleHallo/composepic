@@ -1,48 +1,47 @@
 /* pages/home/home.wxss */
 
-.m-title {
-  display: block;
-  font-weight: bolder;
-  font-size: 32px;
-  width: 750rpx;
-  text-align: center;
-  margin-top: 40rpx;
-}
-
-.m-message {
-  display: block;
-
-}
-.g-action {
-  margin-top: 80rpx;
-}
-
-.m-action {
-  text-align: center;
+.m_welcome{
+  text-align: left;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
-  align-items: center;
-  height: 250rpx;
-  padding-left: 180rpx;
+  padding: 60rpx;
+  width: 750rpx;
 }
 
-.m-pj {
-  background-color: rosybrown;
+.m_offset_x{
+  margin-left: 20rpx;
 }
 
-.m-ys {
-  background-color: orange;
-}
-
-.m-action-image {
-  width: 180rpx;
-  height: 180rpx;
-}
-
-
-.m-action-message {
-  font-size: 22px;
+.m-title {
   font-weight: bolder;
-  margin-left: 40rpx;
+  font-size: 60rpx;
+  text-align: left;
+  color: #333;
 }
+
+.m_tips1{
+  margin-top:42rpx;
+  color: #949293;
+  font-size: 32rpx;
+}
+
+.m_tips2{
+  margin-top:20rpx;
+  color: #949293;
+  font-size: 32rpx;
+}
+.m_action_img{
+  width: 630rpx;
+}
+
+.m_action_pj{
+  margin-top: 50rpx;
+}
+
+.m_action_ys{
+  margin-top: 20rpx;
+}
+
+

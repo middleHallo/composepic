@@ -1,0 +1,14 @@
+<!--pages/compressNow/compressNow.wxml-->
+<view class='g_body'>
+  <image src='{{oldurl}}' wx:if="{{oldurl != ''}}" mode='widthFix' class='willBeCompress'></image>
+  <view class='tips'>
+      <text>—</text>
+      <text> 请选择你想要的压缩率</text>
+      <text> —</text>
+  </view>
+  <slider min='30' max='95' step='5' value='{{value}}' show-value='true' activeColor='#4469ff' backgroundColor='#efefef' bindchange='changeSlider'  class='slider'></slider>
+  <view class='action'>
+    <button class='action_item action_choose' bindtap='chooseImage'>选择图片</button>
+    <button class='action_item action_start' bindtap='startcompress'>开始压缩</button>
+  </view>
+</view>

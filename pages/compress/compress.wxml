@@ -1,11 +1,10 @@
 <!--pages/compress/compress.wxml-->
-<view>
-  <button bindtap='choseImg'>选择图片</button>
-  <image src='{{selected}}' style='width:750rpx;' mode='widthFix' wx:if='{{chooseSuc}}'></image>
+<view class='g_body'>
+    <text class='m_title'>手机一键压缩、方便快捷</text>
+    <text class='m_desc'>自定义图片质量及图片压缩级别</text>
+    <text class='m_desc'>支持JPG、PNG等常用图片格式</text>
+    <text class='m_desc'>提示框轻松对比图片压缩前后的质量</text>
+    <image src='/images/js.png' mode='widthFix' class='m_showpng'></image>
+
+    <button bindtap='goNow' class='goNow'>立刻体验</button>
 </view>
-<view>
-  <input type='digit' placeholder='输入要压缩的倍数，如 0.3'></input>
-  <button bindtap='compressImg'>压缩</button>
-  <image src='{{compressurl}}' wx:if="{{compressSuc}}" style='width:750rpx;' mode='widthFix'></image>
-</view>
-<canvas canvas-id='compress' style='width:{{selectedWidth}}px;height:{{selectedHeight}}px' hidden></canvas>

@@ -11,10 +11,11 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.1",
+	"libVersion": "2.4.1",
 	"appid": "wxdca1a9975cae5ef7",
 	"projectname": "composepic",
 	"isGameTourist": false,
+	"cloudfunctionRoot": "cloud-functions/",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -32,5 +33,6 @@
 			"current": -1,
 			"list": []
 		}
-	}
+	},
+  "miniprogramRoot":"./"
 }

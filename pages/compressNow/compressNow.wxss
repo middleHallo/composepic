@@ -1,0 +1,47 @@
+/* pages/compressNow/compressNow.wxss */
+.g_body{
+  padding: 25rpx 20rpx;
+}
+
+.willBeCompress{
+  width: 710rpx;
+}
+
+.action{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  width: 750rpx;
+  left: 0;
+  bottom: 50rpx;
+}
+
+.action_item{
+  width: 215rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  color: white;
+}
+
+.action_choose{
+  background-color: #4469ff;
+}
+
+.action_start{
+  background-color: #388bff;
+}
+
+.slider{
+  margin-top: 80rpx;
+}
+
+.tips{
+  width: 750rpx;
+  text-align: center;
+  color: #aaa;
+  font-size: 30rpx;
+}

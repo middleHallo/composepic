@@ -1,1 +1,40 @@
 /* pages/compress/compress.wxss */
+
+.g_body{
+  background-color: #f6f9fa;
+  text-align: center;
+  position: relative;
+  padding-top: 45rpx;
+}
+
+.m_title{
+  font-size: 46rpx;
+  color: #4571ff;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.m_desc{
+  font-size: 24rpx;
+  color: #303340;
+   display: block;
+   margin-top: 15rpx;
+}
+
+.m_showpng{
+  width: 700rpx;
+  margin-left: 50rpx;
+}
+
+.goNow{
+  width: 512rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  color: #ffffff;
+  font-size: 36rpx;
+  border-radius: 55rpx;
+  background-image: linear-gradient(to right, #388cff, #4568ff);
+  position: absolute;
+  bottom: 40rpx;
+  left: 119rpx;
+}
